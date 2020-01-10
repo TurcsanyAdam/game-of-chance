@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "BestGame": {
+      "commandName": "Project",
+      "commandLineArgs": "500"
+    }
+  }
+}
