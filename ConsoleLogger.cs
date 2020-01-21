@@ -32,7 +32,7 @@ namespace BestGame
             Console.ForegroundColor = ConsoleColor.Red;
             Console.Write(error);
             Console.ForegroundColor = ConsoleColor.Gray;
-            Console.WriteLine(DateTime.Now + ":" + message);
+            Console.WriteLine(DateTime.Now + ": " + message);
         }
     }
 }

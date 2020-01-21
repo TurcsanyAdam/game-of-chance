@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.IO;
 
 namespace BestGame
 {
@@ -10,44 +11,22 @@ namespace BestGame
         {
             List<Game> gamesList = new List<Game>();
 
-            Game residentEvil2 = new Game("Resident Evil", 2019, "Survival horror", "Capcom", 91);
-            Game sekiro = new Game("Sekiro: Shadows die twice", 2019, "Action adventure", "Activision", 90);
-            Game discoElysium = new Game("Disco Elysium", 2019, "RPG", "ZA/UM", 91);
-            Game devilMayCry5 = new Game("Devil May Cry 5", 2019, "Hack and slash", "Capcom", 89);
-            Game starWarsJedi = new Game("Star Wars Jedi: Fallen Order", 2019, "Action adventure", "EA", 81);
-            Game remnant = new Game("Remnant: From the Ashes", 2019, "TPS soulslike", "Perfect World Entertainment", 81);
-            Game borderland3 = new Game("Borderlands 3", 2019, "Looter shooter", "2K", 82);
-            Game deathStranding = new Game("Death Stranding", 2019, "Strand game", "Kojima productions", 82);
-            Game control = new Game("Control", 2019, "TPS", "505 Games", 82);
-            Game crashRacer = new Game("Crash Team Racing: Nitro-Fueled", 2019, "Arcade racing", "Activision", 83);
-            Game apexLegends = new Game("Apex Legends", 2019, "Battle Royal", "EA games", 89);
-            Game mortalKombat11 = new Game("Mortal Kombat", 2019, "Fighter", "Warner Bros.", 82);
-            Game outerWorlds = new Game("The Outer Worlds", 2019, "RPG", "Obsidian", 86);
-            Game plagueTale = new Game("A Plague Tale: Innocence", 2019, "Action adventure", "Focus Home Interactive", 81);
-            Game metroExodus = new Game("Metro Exodus", 2019, "FPS", "Deep silver", 82);
-            Game wowClassic = new Game("World of Warcraft Classic", 2019, "MMORPG", "Blizzard", 81);
+            using (var reader = new StreamReader(@"..\\..\\..\\Games.csv"))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(",");
+                    Game game = new Game(values[0], int.Parse(values[1]), values[2], values[3], int.Parse(values[4]));
+                    gamesList.Add(game);
 
-            gamesList.Add(residentEvil2);
-            gamesList.Add(sekiro);
-            gamesList.Add(discoElysium);
-            gamesList.Add(devilMayCry5);
-            gamesList.Add(starWarsJedi);
-            gamesList.Add(remnant);
-            gamesList.Add(borderland3);
-            gamesList.Add(deathStranding);
-            gamesList.Add(control);
-            gamesList.Add(crashRacer);
-            gamesList.Add(apexLegends);
-            gamesList.Add(mortalKombat11);
-            gamesList.Add(outerWorlds);
-            gamesList.Add(plagueTale);
-            gamesList.Add(metroExodus);
-            gamesList.Add(wowClassic);
+                }
 
+            }
             return gamesList;
         } 
         
-        public static string GenerateWinner()
+        public string GenerateWinner()
         {
             List<Game> nominees = GenerateData.GetGames();
 

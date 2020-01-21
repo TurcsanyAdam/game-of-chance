@@ -7,6 +7,7 @@ namespace BestGame
     {
         static void Main(string[] args)
         {
+            GenerateData.GetGames();
             GenerateHistoricalDataSet(args);
 
             static void GenerateHistoricalDataSet(string[] args)
@@ -22,7 +23,7 @@ namespace BestGame
                         for (int i = 0; i < int.Parse(args[0]); i++)
                         {
                             dataSet.Generate();
-
+                            dataSet.Load();
                         }
                         
                     }
@@ -35,16 +36,16 @@ namespace BestGame
                 }
                 catch(FormatException e)
                 {
-                    logger.Error($"Not appropriate type - {e}");
+                    logger.Error($"Not appropriate input - {e}");
                 }
                 catch(FileNotFoundException e)
                 {
                     logger.Error($"File not found! - {e}");
 
                 }
-                catch(DivideByZeroException e)
+                catch(FileLoadException e)
                 {
-                    logger.Error("History file empty! Generate some rounds first!");
+                    logger.Error($"History file empty! Generate some rounds first! - {e}");
 
                 }
                 catch(IOException e)

@@ -10,7 +10,9 @@ namespace BestGame
         public string Winner { get; private set; }
         public HistoricalDataPoint()
         {
-            Winner = GenerateData.GenerateWinner();
+            GenerateData generateData = new GenerateData();
+            Winner = generateData.GenerateWinner();
+
         }
 
         public HistoricalDataPoint(string Winner)

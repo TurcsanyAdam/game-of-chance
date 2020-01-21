@@ -14,11 +14,11 @@ namespace BestGame
         {
             this.dataSet = dataSet;
             this.logger = logger;
-            EvaluateData(dataSet);
+            EvaluateData();
         }
-        public void EvaluateData(HistoricalDataSet dataSet)
+        public void EvaluateData()
         {
-            int count = 0;
+            float count = 0;
             string finalWinner = "";
 
             foreach(HistoricalDataPoint game in dataSet.DataPoints)
@@ -31,9 +31,14 @@ namespace BestGame
                     finalWinner = game.Winner;
                 }
             }
-            double chanceOfWinning = dataSet.Size / count;
+            float chanceOfWinning = count/(dataSet.Size-1)*100;
 
-            logger.Winner($"You should bet on {finalWinner} as the GOTY of 2019 as it won {chanceOfWinning} % of times!");
+            if(chanceOfWinning <= 0)
+            {
+                throw new FileLoadException("Error");
+            }
+
+            logger.Winner($"You should bet on {finalWinner} as the GOTY of 2019 as it won {Math.Round(chanceOfWinning, 2)} % of times!");
 
         }
     }
